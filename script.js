@@ -9,14 +9,14 @@ jQuery(document).ready(function ($) {
     var slideHeight = $('.week').height();
     var sliderUlWidth = slideCount * slideWidth;
     // make the slider (viewport) as high and as wide as a single week
-    $('#slider').css({width: slideWidth, height: slideHeight });
+    $('#slider').css({width: slideWidth, height: slideHeight});
     // make the wrapper wide enough to accommodate all the weeks,
     // and shift wrapper according to INITIAL_SLIDE
-    $('#wrapper').css({width: sliderUlWidth, marginLeft: -(INITIAL_SLIDE-1)*slideWidth });
+    $('#wrapper').css({width: sliderUlWidth, marginLeft: -(INITIAL_SLIDE - 1) * slideWidth});
 
     function moveSlide(slideIndex) {
         // move wrapper according to new slide's id
-        $('#wrapper').animate({left: -(slideIndex-INITIAL_SLIDE)*slideWidth}, SLIDE_DURATION);
+        $('#wrapper').animate({left: -(slideIndex - INITIAL_SLIDE) * slideWidth}, SLIDE_DURATION);
     };
 
     $('a.control_prev').click(function () {
@@ -29,8 +29,27 @@ jQuery(document).ready(function ($) {
         }
     });
 
+
+    //      If (the current slide is equal to the second last slide){
+    //      Log to the console that there's only one slide left
+    //      increase the number of the current slide and call the function to move to that slide
+    //      }
+    //      else if (the current slide is less than the total number of slides) then {
+    //      increase the number of the current slide and call the function to move to that slide   /
+    //      } or else {
+    //      Log to the console that you can't move any further
+    //      }
+
     $('a.control_next').click(function () {
-        if (slideIndex < slideCount) {
+        if(slideIndex == (slideCount-2)){
+            console.log("Now I should append another slide.");
+            slideIndex += 1;
+            moveSlide(slideIndex);
+        } else if(slideIndex == (slideCount-1)){
+            console.log("Moving to the last slide...");
+            slideIndex += 1;
+            moveSlide(slideIndex);
+        } else if (slideIndex < slideCount) {
             slideIndex += 1;
             moveSlide(slideIndex);
         } else {
