@@ -35,26 +35,54 @@ jQuery(document).ready(function ($) {
         }
     });
 
+    //When the next button is pressed, a new slide is appended to the
+    //end of the slides, and the first slide is removed, so that the number
+    //of slides remains the same. (Still a problem with slide index
+    //increasing each time, so that when the time the slide index is 6,
+    //there is no slide visible).
 
-    $('a.control_next').click(function () {
+$('a.control_next').click(function () {
+    console.log("Slide Count:" +slideCount);
+    console.log("Initial Slide Index:" +slideIndex);
+    slideIndex ++;
+    console.log("Slide Index after increase:" +slideIndex);
 
-        if(slideIndex == (slideCount-2)){
-            console.log("Two from the end. Time to append a slide.");
-            slideIndex +=1;
-            moveSlide(slideIndex);
+    if(slideIndex == (slideCount-2)){
 
-        } else if(slideIndex == (slideCount-1)){
-            console.log("Last Slide");
-            slideIndex +=1;
-            moveSlide(slideIndex);
+        var slideHTML = "<div class = 'week'></div>"
+        $("#wrapper").append(slideHTML);
+        //Now need to remove the first div
+        var toRemove = $('#wrapper').find('div').first();
+        toRemove.remove();
+        moveSlide(slideIndex);
+        //slideIndex --;
+        console.log("Slide Index after move:" +slideIndex);
 
-        } else {
-            console.log("Can't go right any further");
-        }
-    });
+    } else if(slideIndex == (slideCount-1)){
 
+        var slideHTML = "<div class = 'week'></div>"
+        $("#wrapper").append(slideHTML);
+        //Now need to remove the first div
+        var toRemove = $('#wrapper').find('div').first();
+        toRemove.remove();
+        moveSlide(slideIndex);
+        //slideIndex --;
+        console.log("Slide Index after move:" +slideIndex);
+
+    } else {
+
+        var slideHTML = "<div class = 'week'></div>"
+        $("#wrapper").append(slideHTML);
+        //Now need to remove the first div
+        var toRemove = $('#wrapper').find('div').first();
+        toRemove.remove();
+        moveSlide(slideIndex);
+        //slideIndex --;
+        console.log("Slide Index after move:" +slideIndex);
+    }
 });
 
+});
 
 
 
