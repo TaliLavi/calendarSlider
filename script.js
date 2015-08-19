@@ -1,7 +1,13 @@
+
+
+
 var SLIDE_DURATION = 800;
 var INITIAL_SLIDE = 3;
 
+
 jQuery(document).ready(function ($) {
+    //var toChange = $('#wrapper').find('div:nth-child(3)');
+    //toChange.innerHTML="Number 3!";
     var slideIndex = INITIAL_SLIDE;
 
     var slideCount = $('.week').length;
@@ -16,7 +22,7 @@ jQuery(document).ready(function ($) {
 
     function moveSlide(slideIndex) {
         // move wrapper according to new slide's id
-        $('#wrapper').animate({left: -(slideIndex - INITIAL_SLIDE) * slideWidth}, SLIDE_DURATION);
+        $('#wrapper').animate({left: -(slideIndex  - INITIAL_SLIDE) * slideWidth}, SLIDE_DURATION);
     };
 
     $('a.control_prev').click(function () {
@@ -30,32 +36,25 @@ jQuery(document).ready(function ($) {
     });
 
 
-    //      If (the current slide is equal to the second last slide){
-    //      Log to the console that there's only one slide left
-    //      increase the number of the current slide and call the function to move to that slide
-    //      }
-    //      else if (the current slide is less than the total number of slides) then {
-    //      increase the number of the current slide and call the function to move to that slide   /
-    //      } or else {
-    //      Log to the console that you can't move any further
-    //      }
-
     $('a.control_next').click(function () {
+
         if(slideIndex == (slideCount-2)){
-            console.log("Now I should append another slide.");
-            slideIndex += 1;
+            console.log("Two from the end. Time to append a slide.");
+            slideIndex +=1;
             moveSlide(slideIndex);
+
         } else if(slideIndex == (slideCount-1)){
-            console.log("Moving to the last slide...");
-            slideIndex += 1;
+            console.log("Last Slide");
+            slideIndex +=1;
             moveSlide(slideIndex);
-        } else if (slideIndex < slideCount) {
-            slideIndex += 1;
-            moveSlide(slideIndex);
+
         } else {
-            console.log("Can't move right anymore");
+            console.log("Can't go right any further");
         }
     });
 
 });
-//Hi
+
+
+
+
