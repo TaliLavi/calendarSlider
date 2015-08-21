@@ -24,44 +24,17 @@ jQuery(document).ready(function ($) {
     //console.log("Margin Left Wrapper"+ marginLeft);
 
     function moveSlideRight() {
-        //get current left position of wrapper
-        var element = document.getElementById('wrapper'),
-            style = window.getComputedStyle(element),
-            left = style.getPropertyValue('left');
-        //parse into number
-        var parsedLeft = parseInt(left);
-        console.log("Wrapper Left Position : "+ parsedLeft);
-        console.log("Wrapper left position minus 600px : "+ (parsedLeft - slideWidth));
-        //take 600 away from current left position, and this is the position it needs to animate to
-        $('#wrapper').animate({left: (parsedLeft-slideWidth)}, SLIDE_DURATION );
-        var wrap = document.getElementById('wrapper'),
-            style = window.getComputedStyle(wrap),
-            marginLeft = style.getPropertyValue('margin-left');
-        //parse into number
-        var parsedMarginLeft = parseInt(marginLeft);
-        console.log("Margin Left Wrapper : "+ parsedMarginLeft);
-        console.log("Margin left plus 600px : "+ (parsedMarginLeft + slideWidth));
-        $('#wrapper').css({width: sliderUlWidth, marginLeft: (parsedMarginLeft + slideWidth)});
+        var parsedLeft = getLeftPositionWrapper();                                                  //Get current position of wrapper
+        $('#wrapper').animate({left: (parsedLeft-slideWidth)}, SLIDE_DURATION );                    //take slidewidth away from current left position, and animate to this position
+        var parsedMarginLeft = getLeftMarginWrapper();                                              //Get current left margin of wrapper
+        $('#wrapper').css({width: sliderUlWidth, marginLeft: (parsedMarginLeft + slideWidth)});     //Increase it by the width of a slide
     };//end of moveSlide function
 
     function moveSlideLeft() {
-        //get current left position of wrapper
-        var element = document.getElementById('wrapper'),
-            style = window.getComputedStyle(element),
-            left = style.getPropertyValue('left');
-        //parse into number
-        var parsedLeft = parseInt(left);
-        console.log("Wrapper Left Position : "+ parsedLeft);
-        console.log("Wrapper left position plus 600px : "+ (parsedLeft + slideWidth));
+        var parsedLeft = getLeftPositionWrapper();
         //add 600 to current left position, and this is the position it needs to animate to
         $('#wrapper').animate({left: (parsedLeft + slideWidth)}, SLIDE_DURATION);
-        var wrap = document.getElementById('wrapper'),
-            style = window.getComputedStyle(wrap),
-            marginLeft = style.getPropertyValue('margin-left');
-        //parse into number
-        var parsedMarginLeft = parseInt(marginLeft);
-        console.log("Margin Left Wrapper : "+ parsedMarginLeft);
-        console.log("Margin left minus 600px : "+ (parsedMarginLeft - slideWidth));
+        var parsedMarginLeft = getLeftMarginWrapper();
         $('#wrapper').css({width: sliderUlWidth, marginLeft: (parsedMarginLeft - slideWidth)});
     };//end of moveSlide function
 
@@ -87,6 +60,24 @@ jQuery(document).ready(function ($) {
 });//end of document.ready function
 
 
+function getLeftPositionWrapper(){
+
+    var element = document.getElementById('wrapper'),
+        style = window.getComputedStyle(element),
+        left = style.getPropertyValue('left');                  //Get current left position of wrapper
+    var parsedLeft = parseInt(left);                            //parse into number
+    console.log("Wrapper Left Position : "+ parsedLeft);
+    return parsedLeft;
+}
+
+function getLeftMarginWrapper(){
+    var wrap = document.getElementById('wrapper');
+    var style = window.getComputedStyle(wrap);
+    var marginLeft = style.getPropertyValue('margin-left');     //Get current left margin of wrapper
+    var parsedMarginLeft = parseInt(marginLeft);                //Parse into a number
+    console.log("Margin Left Wrapper : "+ parsedMarginLeft);
+    return parsedMarginLeft;
+}
 
 
 
